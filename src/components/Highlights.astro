@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+
+import VideoCarousel from './VideoCarousel.jsx';
+
+import { watchImg, rightImg } from '../utils';
+---
+
+<script>
+  import gsap from 'gsap';
+
+  gsap.to('#title', { opacity: 1, y: 0 });
+  gsap.to('.link', { opacity: 1, y: 0, duration: 1, stagger: 0.5 });
+</script>
+
+<section
+  id='highlights'
+  class='w-screen overflow-hidden h-full common-padding bg-zinc'
+>
+  <div class='screen-max-width'>
+    <div class='mb-12 w-full md:flex items-end justify-between'>
+      <h1 id='title' class='section-heading'>Get the highlights.</h1>
+
+      <div class='flex flex-wrap items-end gap-5'>
+        <p class='link'>
+          Watch the film
+          <Image
+            src={watchImg}
+            alt='Watch icon'
+            class='ml-2'
+            loading='eager'
+            decoding='sync'
+          />
+        </p>
+
+        <p class='link'>
+          Watch the event
+          <Image
+            src={rightImg}
+            alt='Right icon'
+            class='ml-2'
+            loading='eager'
+            decoding='sync'
+          />
+        </p>
+      </div>
+    </div>
+
+    <VideoCarousel client:only='react' />
+  </div>
+</section>

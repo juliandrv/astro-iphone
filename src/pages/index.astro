@@ -1,0 +1,30 @@
+---
+import '../global.css';
+
+import Hero from '../components/Hero.jsx';
+import Highlights from '../components/Highlights.astro';
+import Navbar from '../components/Navbar.astro';
+import Model from '../components/Model.jsx';
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link
+      rel='icon'
+      type='image/svg+xml'
+      href='/src/assets/images/apple.svg'
+    />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Apple iPhone</title>
+  </head>
+  <body>
+    <main class='bg-black'>
+      <Navbar />
+      <Hero client:only='react' />
+      <Highlights />
+      <Model client:only='react' />
+    </main>
+  </body>
+</html>
