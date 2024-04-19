@@ -24,7 +24,7 @@ main {
 }
 
 canvas {
-  touch-action: none;
+  touch-action: auto !important;
 }
 
 .screen-max-width {
