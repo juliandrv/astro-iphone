@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import { explore1Img, explore2Img, exploreVideo } from '../utils';
+---
+
+<script>
+  import gsap from 'gsap';
+  import { animateWithGsap } from '../utils/animations';
+
+  gsap.to('#exploreVideo', {
+    scrollTrigger: {
+      trigger: '#exploreVideo',
+      toggleActions: 'play pause reverse reverse',
+      start: '-10% bottom',
+    },
+    onComplete: () => {
+      const video = document.querySelector(
+        '#exploreVideo'
+      ) as HTMLVideoElement | null;
+      video.play();
+    },
+  });
+
+  animateWithGsap('#features_title', { y: 0, opacity: 1 });
+  animateWithGsap(
+    '.g_grow',
+    {
+      scale: 1,
+      opacity: 1,
+      ease: 'power1',
+    },
+    { scrub: 5.5 }
+  );
+  animateWithGsap('.g_text', {
+    y: 0,
+    opacity: 1,
+    ease: 'power2.inOut',
+    duration: 1,
+  });
+</script>
+
+<section
+  class='h-full common-padding bg-zinc relative overflow-hidden'
+>
+  <div class='screen-max-width'>
+    <div class='mb-12 w-full'>
+      <h1 id='features_title' class='section-heading'>
+        Explore the full story.
+      </h1>
+    </div>
+
+    <div
+      class='flex flex-col justify-center items-center overflow-hidden'
+    >
+      <div class='mt-32 mb-24 pl-24'>
+        <h2 class='text-5xl lg:text-7xl font-semibold'>iPhone.</h2>
+        <h2 class='text-5xl lg:text-7xl font-semibold'>
+          Forged in titanium.
+        </h2>
+      </div>
+
+      <div class='felx-center flex-col sm:px-10'>
+        <div class='relative h-[50vh] w-full flex items-center'>
+          <video
+            playsinline
+            id='exploreVideo'
+            preload='none'
+            class='w-full h-full object-cover object-center'
+            muted
+            autoplay
+          >
+            <source src={exploreVideo} type='video/mp4' />
+          </video>
+        </div>
+
+        <div class='felx flex-col w-full relative'>
+          <div class='feature-video-container'>
+            <div class='overflow-hidden flex-1 h-[50vh]'>
+              <Image
+                src={explore1Img}
+                alt='titanium'
+                loading='eager'
+                decoding='sync'
+                class='feature-video g_grow'
+              />
+            </div>
+
+            <div class='overflow-hidden flex-1 h-[50vh]'>
+              <Image
+                src={explore2Img}
+                alt='titanium'
+                loading='eager'
+                decoding='sync'
+                class='feature-video g_grow'
+              />
+            </div>
+          </div>
+
+          <div class='feature-text-container'>
+            <div class='flex-1 flex-center'>
+              <p class='feature-text g_text'>
+                iPhone 15 Pro is
+                <span class='text-white'>
+                  the first iPhone to feature an aerospace-grade
+                  titanium design
+                </span>, using the same alloy that spacecrafts use for
+                missions to Mars.
+              </p>
+            </div>
+
+            <div class='flex-1 flex-center'>
+              <p class='feature-text g_text'>
+                Titatinum has one of the best strength-to-weigth
+                ratios of any metal, making these our
+                <span class='text-white'>
+                  lightest Pro models ever.
+                </span>
+                You'll notice the difference the moment you pick one up.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

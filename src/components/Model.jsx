@@ -1,15 +1,14 @@
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ModelView from './ModelView';
 import { useEffect, useRef, useState } from 'react';
+import { yellowImg } from '../utils';
+
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-
-import ModelView from './ModelView.jsx';
-
-import { yellowImg } from '../utils/index.js';
-import { models, sizes } from '../constants/index.js';
-import { animateWithGsapTimeline } from '../utils/animations.js';
+import { models, sizes } from '../constants';
+import { animateWithGsapTimeline } from '../utils/animations';
 
 const Model = () => {
   const [size, setSize] = useState('small');
@@ -43,7 +42,7 @@ const Model = () => {
         '#view2',
         {
           transform: 'translateX(-100%)',
-          duration: 1.5,
+          duration: 2,
         }
       );
     }
@@ -57,18 +56,15 @@ const Model = () => {
         '#view1',
         {
           transform: 'translateX(0)',
-          duration: 1.5,
+          duration: 2,
         }
       );
     }
   }, [size]);
 
   useGSAP(() => {
-    gsap.to('#heading', {
-      y: 0,
-      opacity: 1,
-    });
-  });
+    gsap.to('#heading', { y: 0, opacity: 1 });
+  }, []);
 
   return (
     <section className='common-padding'>
@@ -109,7 +105,7 @@ const Model = () => {
                 right: 0,
                 overflow: 'hidden',
               }}
-              eventSource={document.getElementById('root')}
+              eventSource={document.querySelector('main')}
             >
               <View.Port />
             </Canvas>
@@ -122,9 +118,9 @@ const Model = () => {
 
             <div className='flex-center'>
               <ul className='color-container'>
-                {models.map((item, index) => (
+                {models.map((item, i) => (
                   <li
-                    key={index}
+                    key={i}
                     className='w-6 h-6 rounded-full mx-2 cursor-pointer'
                     style={{ backgroundColor: item.color[0] }}
                     onClick={() => setModel(item)}

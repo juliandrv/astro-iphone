@@ -19,13 +19,13 @@ body {
 }
 
 main {
-  touch-action: pan-y;
+  touch-action: pan-y !important;
   overflow-y: auto;
 }
 
-canvas {
+/* canvas {
   touch-action: auto !important;
-}
+} */
 
 .screen-max-width {
   margin-inline-start: auto;

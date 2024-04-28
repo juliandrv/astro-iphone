@@ -1,0 +1,44 @@
+---
+import { footerLinks } from '../constants';
+---
+
+<footer class='py-5 sm:px-10 px-5'>
+  <div class='screen-max-width'>
+    <div class=''>
+      <p class='font-semibold text-gray text-xs'>
+        More ways to shop:
+        <span class='underline text-blue'>Find an Apple Store</span>
+        or
+        <span class='underline text-blue'>other retailer</span>
+        near you.
+      </p>
+
+      <p class='font-semibold text-gray text-xs'>
+        Or call 000800-040-1699
+      </p>
+    </div>
+
+    <div class='bg-neutral-700 my-5 h-[1px] w-full'></div>
+
+    <div
+      class='flex md:flex-row flex-col md:items-center justify-between'
+    >
+      <p class='font-semibold text-gray text-xs'>
+        Copyfright @ 2024 Apple Inc. All rights reserved.
+      </p>
+
+      <div class='flex mt-2 flex-wrap'>
+        {
+          footerLinks.map((link, i) => (
+            <p class='font-semibold text-gray text-xs'>
+              {link}{' '}
+              {i !== footerLinks.length - 1 && (
+                <span class='mx-2'> | </span>
+              )}{' '}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

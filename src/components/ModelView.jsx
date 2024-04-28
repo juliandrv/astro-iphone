@@ -1,14 +1,15 @@
-import { Suspense } from 'react';
+import {
+  Html,
+  OrbitControls,
+  PerspectiveCamera,
+  View,
+} from '@react-three/drei';
+
 import * as THREE from 'three';
-import { PerspectiveCamera, View } from '@react-three/drei';
-import { OrbitControls } from 'three-stdlib';
-
-extend({ OrbitControls });
-
 import Lights from './Lights';
-import IPhone from './IPhone';
 import Loader from './Loader';
-import { extend, useThree } from '@react-three/fiber';
+import IPhone from './IPhone';
+import { Suspense } from 'react';
 
 const ModelView = ({
   index,
@@ -16,31 +17,9 @@ const ModelView = ({
   gsapType,
   controlRef,
   setRotationState,
-  item,
   size,
+  item,
 }) => {
-  function Controls() {
-    const {
-      camera,
-      gl: { domElement },
-    } = useThree();
-
-    return (
-      <orbitControls
-        args={[camera, domElement]}
-        makeDefault
-        ref={controlRef}
-        target={new THREE.Vector3(0, 0, 0)}
-        enableZoom={false}
-        enablePan={false}
-        rotateSpeed={0.4}
-        onEnd={() =>
-          setRotationState(controlRef.current.getAzimuthalAngle())
-        }
-      />
-    );
-  }
-
   return (
     <View
       index={index}
@@ -49,14 +28,28 @@ const ModelView = ({
         index === 2 ? 'right-[-100%]' : ''
       }`}
     >
+      {/* Ambient Light */}
       <ambientLight intensity={0.3} />
+
       <PerspectiveCamera makeDefault position={[0, 0, 4]} />
+
       <Lights />
-      <Controls />
+
+      <OrbitControls
+        makeDefault
+        ref={controlRef}
+        enableZoom={false}
+        enablePan={false}
+        rotateSpeed={0.4}
+        target={new THREE.Vector3(0, 0, 0)}
+        onEnd={() =>
+          setRotationState(controlRef.current.getAzimuthalAngle())
+        }
+      />
 
       <group
         ref={groupRef}
-        name={`${index === 1} ? 'small : 'large`}
+        name={`${index === 1} ? 'small' : 'large`}
         position={[0, 0, 0]}
       >
         <Suspense fallback={<Loader />}>
