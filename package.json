@@ -15,7 +15,6 @@
     "@gsap/react": "^2.1.0",
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
-    "@sentry/astro": "^7.112.2",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "astro": "^4.6.1",
